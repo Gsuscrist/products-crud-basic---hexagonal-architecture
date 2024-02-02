@@ -15,6 +15,6 @@ public class UpdateProductUseCaseImpl implements IUpdateProductUseCase {
 
     @Override
     public Optional<Product> updateProduct(String uuid, Product updateProduct) {
-        return productRepository.update(updateProduct);
+        return productRepository.update(uuid,updateProduct);
     }
 }

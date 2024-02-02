@@ -3,6 +3,7 @@ package org.example.hexagonalarchitecture01.infrastructure.config;
 import org.example.hexagonalarchitecture01.application.services.ProductService;
 import org.example.hexagonalarchitecture01.application.usecases.*;
 import org.example.hexagonalarchitecture01.domain.ports.out.IProductRepository;
+import org.example.hexagonalarchitecture01.infrastructure.repositories.JpaProductRepositoryAdapter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -21,9 +22,11 @@ public class ApplicationConfig {
     }
 
     @Bean
-    public IProductRepository repository(ProductService productService){
-        return (IProductRepository) productService;
+    public IProductRepository repository(JpaProductRepositoryAdapter repositoryAdapter){
+        return repositoryAdapter;
     }
+
+
 
 
 

@@ -12,7 +12,7 @@ public interface IProductRepository {
 
     List<Product> findAll();
 
-    Optional<Product> update(Product product);
+    Optional<Product> update(String uuid,Product product);
 
     Boolean deleteById(String uuid);
 }

@@ -3,10 +3,12 @@ package org.example.hexagonalarchitecture01.infrastructure.repositories;
 import org.example.hexagonalarchitecture01.infrastructure.entities.ProductEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-public interface IInfrastructureProductRepository extends JpaRepository<ProductEntity, Long> {
+@Repository
+public interface IJpaProductRepository extends JpaRepository<ProductEntity, Long> {
 
     @Query(value = "select * from product_entity where uuid=:uuid",nativeQuery = true)
     Optional<ProductEntity> findByUuid(String uuid);

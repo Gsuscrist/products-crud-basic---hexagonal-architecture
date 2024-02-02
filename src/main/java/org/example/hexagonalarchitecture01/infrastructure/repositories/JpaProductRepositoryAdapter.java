@@ -2,17 +2,19 @@ package org.example.hexagonalarchitecture01.infrastructure.repositories;
 import org.example.hexagonalarchitecture01.domain.models.Product;
 import org.example.hexagonalarchitecture01.domain.ports.out.IProductRepository;
 import org.example.hexagonalarchitecture01.infrastructure.entities.ProductEntity;
+import org.springframework.stereotype.Component;
 
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class ProductService implements IProductRepository{
+@Component
+public class JpaProductRepositoryAdapter implements IProductRepository{
 
-    private final IInfrastructureProductRepository productRepository;
+    private final IJpaProductRepository productRepository;
 
-    public ProductService(IInfrastructureProductRepository productRepository) {
+    public JpaProductRepositoryAdapter(IJpaProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 
@@ -34,8 +36,8 @@ public class ProductService implements IProductRepository{
     }
 
     @Override
-    public Optional<Product> update(Product product) {
-        if(productRepository.existsByUuid(product.getUuid())){
+    public Optional<Product> update(String uuid,Product product) {
+        if(productRepository.existsByUuid(uuid)){
             ProductEntity productEntity = ProductEntity.fromDomainModel(product);
             ProductEntity updatedProductEntity = productRepository.save(productEntity);
             return Optional.of(updatedProductEntity.toDomainModel());
